@@ -1,0 +1,2 @@
+learn llm and chatgpt api
+sleep 8 hours per day
