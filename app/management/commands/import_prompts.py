@@ -16,12 +16,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         user = User.objects.get(id=1)
         for prompt in PROMPT_LIST:
-            App.objects.get_or_create(
-                name=prompt.NAME,
-                user=user,
-                author=prompt.AUTHOR,
-                description=prompt.DESCRIPTION,
-                system_prompt=prompt.SYSTEM_PROMPT,
-                prompt=prompt.PROMPT
+            app, _ = App.objects.get_or_create(
+                name=prompt.NAME, user=user,
             )
+            app.author=prompt.AUTHOR
+            app.description=prompt.DESCRIPTION
+            app.system_prompt=prompt.SYSTEM_PROMPT
+            app.prompt=prompt.PROMPT
+            app.save()
             self.stdout.write(self.style.SUCCESS(f'create {prompt.NAME} executed successfully'))
