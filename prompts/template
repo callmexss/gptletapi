@@ -1,0 +1,19 @@
+from common.applet import Applet
+
+
+NAME = ""
+
+
+AUTHOR = ""
+
+
+DESCRIPTION = ""
+
+
+SYSTEM_PROMPT = '''
+'''
+
+PROMPT = '{content}'
+
+
+APP = Applet(NAME, SYSTEM_PROMPT, PROMPT)
