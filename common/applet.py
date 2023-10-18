@@ -1,7 +1,7 @@
 from gptbase import basev2
 
 
-BASIC_CHAT_PARAMS = basev2.CompletionParameters(stream=True)
+BASIC_CHAT_PARAMS = basev2.CompletionParameters(stream=True, model="gpt-3.5-turbo-16k-0613")
 
 
 class Applet:
