@@ -13,7 +13,14 @@ DESCRIPTION = ""
 SYSTEM_PROMPT = '''
 '''
 
+
 PROMPT = '{content}'
+
+
+MAX_TOKEN = 2000
+
+
+DEFAULT_MODEL = "chatgpt-3.5-turbo"
 
 
 APP = Applet(NAME, SYSTEM_PROMPT, PROMPT)

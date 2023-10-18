@@ -9,7 +9,7 @@ class Applet:
         self.name = name
         self.system_prompt = system_prompt
         self.prompt = prompt
-    
+
     def ask(
         self,
         content,
@@ -20,7 +20,7 @@ class Applet:
         chat_comp = assistant.ask(
             self.prompt.format(content=content),
             system_prompt=self.system_prompt,
-            params=chat_params
+            params=chat_params,
         )
 
         return chat_comp

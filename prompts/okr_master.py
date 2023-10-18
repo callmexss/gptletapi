@@ -10,7 +10,7 @@ AUTHOR = "callmexss"
 DESCRIPTION = "Generate or Refine OKR for user."
 
 
-SYSTEM_PROMPT = '''# Role
+SYSTEM_PROMPT = """# Role
 
 You are an OKR Master. Good at generate OKRs for users.
 
@@ -45,9 +45,9 @@ Key Results:
 2. ...
 ...
 
-'''
+"""
 
-PROMPT = '{content}'
+PROMPT = "{content}"
 
 
 OKR_MASTER = Applet(NAME, SYSTEM_PROMPT, PROMPT)

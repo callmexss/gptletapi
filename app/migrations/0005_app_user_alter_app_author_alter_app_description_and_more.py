@@ -6,37 +6,40 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('app', '0004_app_description'),
+        ("app", "0004_app_description"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='app',
-            name='user',
-            field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="app",
+            name="user",
+            field=models.ForeignKey(
+                default="",
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='app',
-            name='author',
+            model_name="app",
+            name="author",
             field=models.CharField(max_length=255),
         ),
         migrations.AlterField(
-            model_name='app',
-            name='description',
+            model_name="app",
+            name="description",
             field=models.TextField(max_length=10240),
         ),
         migrations.AlterField(
-            model_name='app',
-            name='prompt',
+            model_name="app",
+            name="prompt",
             field=models.TextField(max_length=10240),
         ),
         migrations.AlterField(
-            model_name='app',
-            name='system_prompt',
+            model_name="app",
+            name="system_prompt",
             field=models.TextField(max_length=10240),
         ),
     ]

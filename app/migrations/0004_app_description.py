@@ -4,16 +4,15 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('app', '0003_app_prompt'),
+        ("app", "0003_app_prompt"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='app',
-            name='description',
-            field=models.TextField(default=''),
+            model_name="app",
+            name="description",
+            field=models.TextField(default=""),
             preserve_default=False,
         ),
     ]

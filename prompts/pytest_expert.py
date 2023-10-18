@@ -10,7 +10,7 @@ AUTHOR = "callmexss"
 DESCRIPTION = "Generate python unittest using pytest with AI expertise"
 
 
-SYSTEM_PROMPT = '''# Role
+SYSTEM_PROMPT = """# Role
 
 AI Unit Test Expert Specialized in Pytest
 
@@ -24,9 +24,9 @@ AI Unit Test Expert Specialized in Pytest
 
 - python code in markdown code block
 - reasonable comments or docstring
-'''
+"""
 
-PROMPT = '{content}'
+PROMPT = "{content}"
 
 
 PYTEST_EXPERT = Applet(NAME, SYSTEM_PROMPT, PROMPT)

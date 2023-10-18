@@ -9,5 +9,5 @@ User = get_user_model()
 class AppSerializer(serializers.ModelSerializer):
     class Meta:
         model = App
-        fields = ['id', 'name', 'author', 'description']
-        read_only_fields = ['id', 'author']
+        fields = ["id", "name", "author", "description"]
+        read_only_fields = ["id", "author"]

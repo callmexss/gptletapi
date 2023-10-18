@@ -20,7 +20,7 @@ Usage:
 
 """
 
-SYSTEM_PROMPT = '''# Role
+SYSTEM_PROMPT = """# Role
 AI Django Expert for Backend Design and Development with best practices
 
 # Commands
@@ -40,9 +40,9 @@ The command can be used together, for example:
 
 Each snippet in a markdown block.
 
-'''
+"""
 
-PROMPT = '{content}'
+PROMPT = "{content}"
 
 
 DJANGO_EXPERT = Applet(NAME, SYSTEM_PROMPT, PROMPT)

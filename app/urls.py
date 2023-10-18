@@ -4,9 +4,9 @@ from .views import AppViewSet, OpenAIView
 
 
 router = DefaultRouter()
-router.register(r'apps', AppViewSet)
+router.register(r"apps", AppViewSet)
 
 urlpatterns = [
-    path('v1/', include(router.urls)),
-    path('v1/openai/', OpenAIView.as_view(), name='openai'),
+    path("v1/", include(router.urls)),
+    path("v1/openai/", OpenAIView.as_view(), name="openai"),
 ]
