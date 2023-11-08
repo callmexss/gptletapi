@@ -1,4 +1,4 @@
-from gptbase import basev2
+from gptbase import base
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
@@ -26,6 +26,6 @@ class OpenAIView(APIView):
         app = get_object_or_404(App, id=app_id)
         applet = build_applet_from_model(app)
         chat_comp = applet.ask(content)
-        chunks = basev2.get_chunks(chat_comp)
+        chunks = base.get_chunks(chat_comp)
 
         return StreamingHttpResponse(chunks)

@@ -1,7 +1,7 @@
-from gptbase import basev2
+from gptbase import base, const
 
 
-BASIC_CHAT_PARAMS = basev2.CompletionParameters(stream=True, model="gpt-3.5-turbo-16k-0613")
+BASIC_CHAT_PARAMS = base.CompletionParameters(stream=True, model=const.GPT_35_TURBO_1106)
 
 
 class Applet:
@@ -13,9 +13,9 @@ class Applet:
     def ask(
         self,
         content,
-        chat_params: basev2.CompletionParameters = BASIC_CHAT_PARAMS,
+        chat_params: base.CompletionParameters = BASIC_CHAT_PARAMS,
     ):
-        assistant = basev2.Assistant()
+        assistant = base.BaseChat()
 
         chat_comp = assistant.ask(
             self.prompt.format(content=content),
