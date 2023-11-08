@@ -19,3 +19,13 @@ class App(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class GPTEntry(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    image_url = models.URLField(max_length=1024)
+    link_url = models.URLField(max_length=1024)
+
+    def __str__(self):
+        return self.name

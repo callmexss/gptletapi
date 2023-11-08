@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import App
+from .models import App, GPTEntry
 
 
+@admin.register(App)
 class AppAdmin(admin.ModelAdmin):
     list_display = ("name", "author", "created_at", "updated_at")
     search_fields = ("name", "author")
@@ -9,4 +10,7 @@ class AppAdmin(admin.ModelAdmin):
     ordering = ("-created_at",)
 
 
-admin.site.register(App, AppAdmin)
+@admin.register(GPTEntry)
+class GPTEntryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'image_url', 'link_url')
+    search_fields = ('name',)
