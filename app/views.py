@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 
 from common.applet import Applet
 from .models import App, GPTEntry
-from .serializers import AppSerializer
+from .serializers import AppSerializer, GPTEntrySerializer
 
 
 def build_applet_from_model(app: App):
@@ -36,5 +36,4 @@ class OpenAIView(APIView):
 
 class GPTEntryViewSet(viewsets.ModelViewSet):
     queryset = GPTEntry.objects.all()
-    serializer_class = AppSerializer
-
+    serializer_class = GPTEntrySerializer
