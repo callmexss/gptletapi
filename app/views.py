@@ -7,7 +7,7 @@ from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 
 from common.applet import Applet
-from .models import App
+from .models import App, GPTEntry
 from .serializers import AppSerializer
 
 
@@ -32,3 +32,9 @@ class OpenAIView(APIView):
         chunks = base.get_chunks(chat_comp)
 
         return StreamingHttpResponse(chunks)
+
+
+class GPTEntryViewSet(viewsets.ModelViewSet):
+    queryset = GPTEntry.objects.all()
+    serializer_class = AppSerializer
+
