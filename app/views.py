@@ -3,6 +3,8 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from django.http import StreamingHttpResponse
+from django_ratelimit.decorators import ratelimit
+from django.utils.decorators import method_decorator
 
 from common.applet import Applet
 from .models import App
@@ -18,6 +20,7 @@ class AppViewSet(viewsets.ModelViewSet):
     serializer_class = AppSerializer
 
 
+@method_decorator(ratelimit(key='ip', rate='100/d', method='POST'), name='post')
 class OpenAIView(APIView):
     def post(self, request, *args, **kwargs):
         app_id = request.data.get("id")
