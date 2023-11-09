@@ -12,7 +12,7 @@ class AppAdmin(admin.ModelAdmin):
 
 @admin.register(GPTEntry)
 class GPTEntryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'description', 'image_url', 'link_url')
+    list_display = ('name', 'category', 'description', 'link_url', 'image_url')
     search_fields = ('name', 'description')
 
 
