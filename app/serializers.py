@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import App, GPTEntry
+from .models import App, GPTEntry, Category
 
 
 User = get_user_model()
@@ -14,7 +14,9 @@ class AppSerializer(serializers.ModelSerializer):
 
 
 class GPTEntrySerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField()
+
     class Meta:
         model = GPTEntry
-        fields = ["id", "name", "description", "image_url", "link_url"]
+        fields = ["id", "name", "description", "category", "image_url", "link_url"]
         read_only_fields = ["id"]
