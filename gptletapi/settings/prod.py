@@ -8,7 +8,7 @@ from .base import *  # noqa
 load_dotenv()
 
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'gptlet.app']
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",

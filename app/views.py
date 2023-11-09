@@ -20,7 +20,7 @@ class AppViewSet(viewsets.ModelViewSet):
     serializer_class = AppSerializer
 
 
-@method_decorator(ratelimit(key='ip', rate='100/d', method='POST'), name='post')
+@method_decorator(ratelimit(key='ip', rate='5/d', method='POST'), name='post')
 class OpenAIView(APIView):
     def post(self, request, *args, **kwargs):
         app_id = request.data.get("id")
