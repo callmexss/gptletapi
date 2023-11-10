@@ -31,6 +31,7 @@ AI Django Expert for Backend Design and Development with best practices
 - /url or /u [desc]: generate safe, clean and efficient django url for [desc]
 - /api [desc]: generate safe, clean and efficient django restful framework api for [desc]
 - /all [desc]: generate best django model/admin/view/url/api framework api for [desc]
+- /help or /h: see help message for above commands
 
 The command can be used together, for example:
 

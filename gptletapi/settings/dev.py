@@ -1,4 +1,4 @@
-import os
+import os  # noqa
 
 from dotenv import load_dotenv
 
