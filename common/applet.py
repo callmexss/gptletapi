@@ -1,3 +1,5 @@
+import json
+
 import re
 import bs4
 import requests
@@ -5,6 +7,36 @@ from gptbase import base, const
 
 
 BASIC_CHAT_PARAMS = base.CompletionParameters(stream=True, model=const.GPT_35_TURBO_1106)
+
+
+CATEGORIES_LI = '''
+Miscellaneous
+Social and Cultural
+Science and Technology
+Information and Content Management
+Leisure and Games
+Spirituality and Philosophy
+Finance and Cryptocurrency
+Food and Beverage
+Art and Design
+Marketing and Communication
+Health and Wellness
+Productivity and Business
+Entertainment and Creativity
+Education and Research
+Developer Tools
+'''
+
+
+CATEGORY_SYSTEM_PROMPT = f'''Reference categories list:
+
+{CATEGORIES_LI}
+
+generate the category json output for a GPT:
+
+{{"category": CATEGORY_NAME}}
+
+'''
 
 
 class Applet:
@@ -55,3 +87,16 @@ def extract_info_from_link(link_url: str):
         'image_url': image_url,
         'link_url': link_url
     }
+
+
+def get_category_name(category):
+    chat = base.BaseChat()
+    chat_params = base.CompletionParameters(
+        model=const.GPT_35_TURBO_1106,
+    )
+    return json.loads(
+        base.get_message(
+            chat.ask(category, CATEGORY_SYSTEM_PROMPT, chat_params)
+        )
+    )['category']
+

@@ -7,8 +7,8 @@ from django.http import StreamingHttpResponse
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 
-from common.applet import Applet, extract_info_from_link
-from .models import App, GPTEntry
+from common.applet import Applet, extract_info_from_link, get_category_name
+from .models import App, GPTEntry, Category
 from .serializers import AppSerializer, GPTEntrySerializer, URLSerializer
 
 
@@ -46,12 +46,19 @@ class URLProcessView(APIView):
         if serializer.is_valid():
             url = serializer.validated_data['url']
             try:
-                entry = extract_info_from_link(url)
-                entry, _ = GPTEntry.objects.get_or_create(
-                            name=entry['name'],
-                            description=entry['description'],
-                            image_url=entry['image_url'],
-                            link_url=entry['link_url']
+                info = extract_info_from_link(url)
+                name=info['name']
+                description = info['description']
+                category_name = get_category_name(f'{name}\n{description}')
+                category, _ = Category.objects.get_or_create(
+                    name=category_name
+                )
+                _ = GPTEntry.objects.get_or_create(
+                            name=name,
+                            description=description,
+                            image_url=info['image_url'],
+                            link_url=info['link_url'],
+                            category=category,
                         )
                 return Response(
                     {"message": "Entry created successfully"},
