@@ -41,11 +41,12 @@ class App(models.Model):
 
 class GPTEntry(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     image_url = models.URLField(max_length=1024)
     link_url = models.URLField(max_length=1024)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category_apps", null=True)
     tags = models.ManyToManyField(Tag, related_name="tag_apps", blank=True)
+    md_context = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
