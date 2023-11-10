@@ -20,3 +20,7 @@ class GPTEntrySerializer(serializers.ModelSerializer):
         model = GPTEntry
         fields = ["id", "name", "description", "category", "image_url", "link_url"]
         read_only_fields = ["id"]
+
+
+class URLSerializer(serializers.Serializer):
+    url = serializers.URLField()
