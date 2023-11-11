@@ -24,3 +24,4 @@ class GPTEntrySerializer(serializers.ModelSerializer):
 
 class URLSerializer(serializers.Serializer):
     url = serializers.URLField()
+    generate_category = serializers.BooleanField(default=False)

@@ -45,21 +45,37 @@ class URLProcessView(APIView):
         serializer = URLSerializer(data=request.data)
         if serializer.is_valid():
             url = serializer.validated_data['url']
+            generate_category = serializer.validated_data['generate_category']
+            print(generate_category)
             try:
                 info = extract_info_from_link(url)
                 name=info['name']
                 description = info['description']
-                category_name = get_category_name(f'{name}\n{description}')
-                category, _ = Category.objects.get_or_create(
-                    name=category_name
+                image_url = info['image_url']
+                if generate_category:
+                    category_name = get_category_name(f'{name}\n{description}')
+                    category, _ = Category.objects.get_or_create(
+                        name=category_name
+                    )
+                else:
+                    category = None
+
+                entry, _ = GPTEntry.objects.get_or_create(
+                    link_url=info['link_url'],
                 )
-                _ = GPTEntry.objects.get_or_create(
-                            name=name,
-                            description=description,
-                            image_url=info['image_url'],
-                            link_url=info['link_url'],
-                            category=category,
-                        )
+                
+                if name != entry.name:
+                    entry.name = name
+                if description != entry.description:
+                    entry.description = description
+                if image_url != entry.image_url:
+                    entry.image_url=info['image_url']
+                
+                if not entry.category:
+                    entry.category = category
+
+                entry.save()
+                
                 return Response(
                     {"message": "Entry created successfully"},
                     status=status.HTTP_201_CREATED)
