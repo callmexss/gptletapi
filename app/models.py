@@ -47,6 +47,44 @@ class GPTEntry(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category_apps", null=True)
     tags = models.ManyToManyField(Tag, related_name="tag_apps", blank=True)
     article = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    entry = models.ForeignKey(GPTEntry, on_delete=models.CASCADE, related_name="comments", db_index=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name="replies", db_index=True)
+    text = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Comment on {self.entry.name}"
+
+    @property
+    def is_reply(self):
+        return self.parent is not None
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['entry', 'parent']),
+        ]
+
+
+class AbstractVote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_upvote = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+        unique_together = ('user',)
+
+class EntryVote(AbstractVote):
+    entry = models.ForeignKey(GPTEntry, on_delete=models.CASCADE, related_name='votes')
+
+class CommentVote(AbstractVote):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='votes')
