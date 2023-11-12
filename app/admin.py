@@ -17,6 +17,7 @@ class GPTEntryAdmin(admin.ModelAdmin):
         'category',
         'description',
         'link_url',
+        'unique_link_url',
         'image_url',
         'created_at',
         'updated_at',
