@@ -70,12 +70,15 @@ class URLProcessView(APIView):
                 else:
                     category = None
 
+                unique_link_url = info['link_url'][:37]
                 entry, _ = GPTEntry.objects.get_or_create(
-                    link_url=info['link_url'],
+                    unique_link_url=unique_link_url,
                 )
                 
                 if name != entry.name:
                     entry.name = name
+                if not entry.link_url:
+                    entry.link_url = info['link_url']
                 if description != entry.description:
                     entry.description = description
                 if image_url != entry.image_url:
