@@ -2,6 +2,7 @@ from gptbase import base
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404
 from django.http import StreamingHttpResponse
 from django_ratelimit.decorators import ratelimit
@@ -36,8 +37,17 @@ class OpenAIView(APIView):
 
 
 class GPTEntryViewSet(viewsets.ModelViewSet):
-    queryset = GPTEntry.objects.all()
     serializer_class = GPTEntrySerializer
+    queryset = GPTEntry.objects.all()
+
+    def get_queryset(self):
+        queryset_cache = cache.get('gpt_entry_queryset')
+
+        if not queryset_cache:
+            queryset_cache = GPTEntry.objects.all()
+            cache.set('gpt_entry_queryset', queryset_cache, 300)
+
+        return queryset_cache
 
 
 class URLProcessView(APIView):
