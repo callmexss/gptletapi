@@ -44,7 +44,7 @@ class GPTEntry(models.Model):
     description = models.TextField(blank=True, null=True)
     image_url = models.URLField(max_length=1024)
     link_url = models.URLField(max_length=1024)
-    unique_link_url = models.URLField(max_length=1024, blank=True)
+    unique_link_url = models.URLField(max_length=1024, blank=True, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category_apps", null=True)
     tags = models.ManyToManyField(Tag, related_name="tag_apps", blank=True)
     article = models.TextField(blank=True, null=True)

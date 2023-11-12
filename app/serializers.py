@@ -27,7 +27,7 @@ class GPTEntrySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GPTEntry
-        fields = ["id", "name", "description", "category", "image_url", "link_url", "comments", "upvotes", "downvotes"]
+        fields = ["id", "name", "description", "category", "image_url", "link_url", "unique_link_url", "comments", "upvotes", "downvotes"]
         read_only_fields = ["id", "upvotes", "downvotes", "comments"]
 
     def get_upvotes(self, obj):
