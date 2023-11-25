@@ -49,7 +49,7 @@ class GPTEntryViewSet(viewsets.ModelViewSet):
         queryset_cache = cache.get('gpt_entry_queryset')
 
         if not queryset_cache:
-            queryset_cache = GPTEntry.objects.all()
+            queryset_cache = GPTEntry.objects.all()[:300]
             cache.set('gpt_entry_queryset', queryset_cache, 300)
 
         return queryset_cache
@@ -86,8 +86,8 @@ class URLProcessView(APIView):
                     entry.link_url = info['link_url']
                 if description != entry.description:
                     entry.description = description
-                if image_url != entry.image_url:
-                    entry.image_url=info['image_url']
+                if image_url != entry.logo_url:
+                    entry.logo_url=info['image_url']
                 
                 if not entry.category:
                     entry.category = category

@@ -41,8 +41,10 @@ class App(models.Model):
 
 class GPTEntry(models.Model):
     name = models.CharField(max_length=255)
+    author = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    image_url = models.URLField(max_length=1024)
+    image_url = models.URLField(max_length=1024, blank=True, null=True)
+    welcome_message = models.TextField(blank=True, null=True)
     link_url = models.URLField(max_length=1024)
     unique_link_url = models.URLField(max_length=1024, blank=True, unique=True)
     instructions = models.TextField(blank=True, null=True)
