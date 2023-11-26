@@ -25,3 +25,4 @@ python-dotenv==0.21.0
 gptbase==0.3.1
 beautifulsoup4==4.11.1
 requests==2.28.1
+gunicorn==21.2.0
