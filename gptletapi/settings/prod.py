@@ -8,7 +8,13 @@ from .base import *  # noqa
 load_dotenv()
 
 DEBUG = False
-STATIC_ROOT = BASE_DIR / "staticfiles"  # noqa
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'gptlet.app']
 DATABASES = {
     "default": {
