@@ -33,8 +33,3 @@ cors_origins = os.getenv("CORS_ORIGIN_WHITELIST", "")
 cors_allowed = os.getenv("CORS_ALLOWED_ORIGIN", "")
 CORS_ORIGIN_WHITELIST = cors_origins.split(",") if cors_origins else []
 CORS_ALLOWED_ORIGIN = cors_origins.split(",") if cors_origins else []
-
-SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "True") == "True"
-SECURE_PROXY_SSL_HEADER = tuple(os.getenv("SECURE_PROXY_SSL_HEADER", "HTTP_X_FORWARDED_PROTO,https").split(","))
-SESSION_COOKIE_SECURE = os.getenv("SESSION_COOKIE_SECURE", "True") == "True"
-CSRF_COOKIE_SECURE = os.getenv("CSRF_COOKIE_SECURE", "True") == "True"
