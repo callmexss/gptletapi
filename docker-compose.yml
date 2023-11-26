@@ -12,6 +12,7 @@ services:
       - /etc/nginx/certs
       - /etc/nginx/vhost.d
       - /usr/share/nginx/html
+      - ./conf/nginx-static.conf:/etc/nginx/conf.d/custom.conf
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
@@ -41,6 +42,14 @@ services:
       - media_volume:/app/media
     depends_on:
       - nginx-proxy
+
+  nginx-static:
+    image: nginx:latest
+    container_name: nginx-static
+    volumes:
+      - static_volume:/usr/share/nginx/html/static
+    ports:
+      - "8080:80"
 
 volumes:
   static_volume:
