@@ -1,55 +1,27 @@
 version: '3.8'
 
 services:
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    container_name: nginx-proxy
+  nginx:
+    image: nginx:latest
+    container_name: nginx
     ports:
       - "80:80"
-      - "443:443"
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /etc/nginx/certs
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
-      - ./conf/nginx-static.conf:/etc/nginx/conf.d/custom.conf
-
-  letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: letsencrypt
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/usr/share/nginx/html/static
+      - media_volume:/usr/share/nginx/html/media
     depends_on:
-      - nginx-proxy
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /etc/nginx/certs:/etc/nginx/certs:rw
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
-    volumes_from:
-      - nginx-proxy
+      - web
 
   web:
     build: .
     command: gunicorn gptletapi.wsgi:application --bind 0.0.0.0:8000
     expose:
       - 8000
-    environment:
-      - VIRTUAL_HOST=drfapi.buzz
-      - LETSENCRYPT_HOST=drfapi.buzz
-      - LETSENCRYPT_EMAIL=callmexss@126.com
     volumes:
       - .:/app
       - static_volume:/app/static
       - media_volume:/app/media
-    depends_on:
-      - nginx-proxy
-
-  nginx-static:
-    image: nginx:latest
-    container_name: nginx-static
-    volumes:
-      - static_volume:/usr/share/nginx/html/static
-    ports:
-      - "8080:80"
 
 volumes:
   static_volume:
