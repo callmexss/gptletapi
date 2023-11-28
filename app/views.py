@@ -1,5 +1,5 @@
 from gptbase import base
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.views.decorators.cache import cache_page
@@ -40,19 +40,8 @@ class OpenAIView(APIView):
 class GPTEntryViewSet(viewsets.ModelViewSet):
     serializer_class = GPTEntrySerializer
     queryset = GPTEntry.objects.all()
-
-    @method_decorator(cache_page(300))
-    def list(self, request, *args, **kwargs):
-        return super(GPTEntryViewSet, self).list(request, *args, **kwargs)
-
-    def get_queryset(self):
-        queryset_cache = cache.get('gpt_entry_queryset')
-
-        if not queryset_cache:
-            queryset_cache = GPTEntry.objects.all()[:300]
-            cache.set('gpt_entry_queryset', queryset_cache, 300)
-
-        return queryset_cache
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'description', 'category__name'] 
 
 
 class URLProcessView(APIView):
