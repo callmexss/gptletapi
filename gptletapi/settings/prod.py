@@ -26,4 +26,4 @@ DATABASES = {
 cors_origins = os.getenv("CORS_ORIGIN_WHITELIST", "")
 cors_allowed = os.getenv("CORS_ALLOWED_ORIGIN", "")
 CORS_ORIGIN_WHITELIST = cors_origins.split(",") if cors_origins else []
-CORS_ALLOWED_ORIGIN = cors_origins.split(",") if cors_origins else []
+CORS_ALLOWED_ORIGINS = cors_origins.split(",") if cors_origins else []
