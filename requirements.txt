@@ -26,3 +26,4 @@ beautifulsoup4==4.11.1
 requests==2.28.1
 gunicorn==21.2.0
 celery==5.2.7
+apify-client==1.6.0
