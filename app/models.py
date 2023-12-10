@@ -49,7 +49,7 @@ class GPTEntry(models.Model):
     unique_link_url = models.URLField(max_length=1024, blank=True, unique=True)
     instructions = models.TextField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category_apps", null=True)
-    tags = models.ManyToManyField(Tag, related_name="tag_apps", blank=True)
+    tags = models.ManyToManyField(Tag, related_name="tag_gpts", blank=True)
     article = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
