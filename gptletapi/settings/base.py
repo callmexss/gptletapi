@@ -148,3 +148,16 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 30,
 }
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+
+CELERY_BEAT_SCHEDULE = {
+    'check-submit-tasks-every-hour': {
+        'task': 'app.tasks.check_and_process_submit_tasks',
+        'schedule': {
+            'minute': '0',
+            'hour': '*',
+        },
+    },
+}

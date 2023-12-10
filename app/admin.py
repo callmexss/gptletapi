@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import App, GPTEntry, Category, Tag
+from .models import App, GPTEntry, Category, Tag, SubmitTask
 
 
 @admin.register(App)
@@ -38,3 +38,8 @@ class CategoryAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_at', 'updated_at')
     search_fields = ('name',)
+
+
+@admin.register(SubmitTask)
+class SubmitTaskAdmin(admin.ModelAdmin):
+    list_display = ('link_url', 'finished', 'notes')

@@ -94,3 +94,9 @@ class EntryVote(AbstractVote):
 
 class CommentVote(AbstractVote):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='votes')
+
+
+class SubmitTask(models.Model):
+    link_url = models.URLField(max_length=1024)
+    finished = models.BooleanField(default=False)
+    notes = models.TextField(blank=True, null=True)

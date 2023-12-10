@@ -18,7 +18,7 @@ def convert_item_to_entry_obj(item):
     return {
         'name': item['title'],
         'description': item['description'],
-        'image_url': item['logoUrl'],
+        'image_url': item['logoUrl'] or os.environ['logoUrl'],
         'link_url': item['url'],
         'author': item['author'],
         'welcome_message': item['welcomeMessage'],
