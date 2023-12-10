@@ -87,8 +87,10 @@ class AbstractVote(models.Model):
         abstract = True
         unique_together = ('user',)
 
+
 class EntryVote(AbstractVote):
     entry = models.ForeignKey(GPTEntry, on_delete=models.CASCADE, related_name='votes')
+
 
 class CommentVote(AbstractVote):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='votes')
