@@ -3,9 +3,14 @@ import os
 from celery import Celery
 from celery.schedules import crontab
 from django.conf import settings
+from dotenv import load_dotenv
 
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gptletapi.settings.prod')
+load_dotenv()
+
+
+DJ_SETTINGS = os.environ.get('DJ_SETTINGS', 'prod')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'gptletapi.settings.{DJ_SETTINGS}')
 
 app = Celery('gptletapi')
 app.config_from_object('django.conf:settings', namespace='CELERY')
