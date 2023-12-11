@@ -4,6 +4,7 @@ from celery.schedules import crontab
 from django.conf import settings
 
 
+settings.configure()
 app = Celery('gptletapi')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
